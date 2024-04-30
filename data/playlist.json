@@ -9,24 +9,24 @@
         },
         {
             "music" : "Track 2",
-            "title" : "Inspiring Cinematic ambiant",
-            "src" : "inspiring-cinematic-ambiant.mp3",
+            "title" : "Inspiring Cinematic ambient",
+            "src" : "inspiring-cinematic-ambient.mp3",
             "artist" : "Lexin_Music",
-            "cover" : "balloon.png"
+            "cover" : "balloon.jpg"
         },
         {
             "music" : "Track 3",
             "title" : "Lifelike",
             "src" : "lifelike.mp3",
             "artist" : "AlexiAction",
-            "cover" : "licorice-tea.png"
+            "cover" : "licorice-tea.jpg"
         },
         {
             "music" : "Track 4",
             "title" : "Risk",
             "src" : "risk.mp3",
             "artist" : "StudioKolomna",
-            "cover" : "sparkling-champagne.png"
+            "cover" : "sparkling-champagne.jpg"
         }
     ]
 }
