@@ -7,46 +7,86 @@ window.onload = async () => {
     //récupération de la playlist
     async function loadPlaylist() {
         try {
-
             const response = await fetch("../data/playlist.json");
             const data = await response.json();
             const playlist = await data.playlist;
             return playlist;
-
         } catch (error) {
-
-            console.error("problem to retrieve playlist")
+            console.error("problem to retrieve playlist");
         }
     };
+
+    //chargement de la playlist
+    let playlist = await loadPlaylist();
 
     //création du lecteur
     let myAudioPlayer = new Audio();
 
     //création de l'index de lecture;
+    /*
+    * @param {integer} trackIndex - The index of the current playing track 
+    */
     let trackIndex = 0;
+
+
+    //fonction de charge des informations
+    
+    
 
     //fonction pour charger la first track
     async function loadFirstTrack(trackNumber) {
         //chargement de la playlist
-        let playlist = await loadPlaylist();
+
         myAudioPlayer.src = `./music/${playlist[trackNumber].src}`;
+        myAudioPlayer.currentTime = 0;
+
         document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
         document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
         document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
+        document.getElementById('tableList').innerHTML = "";
 
-        myAudioPlayer.currentTime = 0;
+        playlist.forEach(track => {
+            if(playlist.indexOf(track) === trackIndex){
+                document.getElementById('tableList').innerHTML += 
+                `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
+                    <td>${track.music}</td>
+                    <td>${track.artist}</td>
+                    <td>${track.title}</td>
+                </tr>`
+            } else {
+                document.getElementById('tableList').innerHTML += 
+                `<tr data-index="${playlist.indexOf(track)}">
+                    <td>${track.music}</td>
+                    <td>${track.artist}</td>
+                    <td>${track.title}</td>
+                </tr>`
+            }
+            
+        });
+        
+        //chargement de la liste de lecture
+        let trackList = document.querySelectorAll('tr');
+
+
+        trackList.forEach(track =>{
+            track.addEventListener("dblclick", (event)=>{
+                let targetTrack = event.target.closest('tr');
+                trackIndex = parseInt(targetTrack.dataset.index);
+                loadTrack(trackIndex);
+                // targetTrack.classList.add('playingNow');
+                // console.log(targetTrack);
+                
+            })
+        })
     }
+
+    //chargement de la première piste
+    await loadFirstTrack(trackIndex);
 
     //fonction de loadingtrack
     async function loadTrack(trackNumber) {
-        //chargement de la playlist
-        let playlist = await loadPlaylist();
-        myAudioPlayer.src = `./music/${playlist[trackNumber].src}`;
-        document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
-        document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
-        document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
-
-        myAudioPlayer.currentTime = 0;
+        
+        await loadFirstTrack(trackNumber);
         
         myAudioPlayer.play();
         
@@ -57,8 +97,6 @@ window.onload = async () => {
         
     };
 
-    //chargement de la première piste
-    loadFirstTrack(trackIndex);
 
 
     /* CONTROL PANEL */
@@ -109,6 +147,8 @@ window.onload = async () => {
         }
     })
 
+    
+    
 
     /* VOLUME INTERFACE */
     //recupération des boutons de l'interface volume

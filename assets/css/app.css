@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -6,18 +6,31 @@
 
 body{
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
+    flex-direction: row;
+}
+
+section div{
+    background-color: rgb(255, 255, 255, 0.6);
+}
+
+#mainBadger img{
+    height: 100vh;
+}
+
+#mainInterface{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: center;
-    text-align: center;
 }
 
 /* class switch pour afficher cacher switcher des élements (boutons play/pause) */
-.hide{
+.hide {
     display: none;
 }
 
-#controlPanel{
+#controlPanel {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -26,10 +39,22 @@ body{
 }
 
 
-
-#trackImg{
-
+#trackImg {
     width: 250px;
     height: 250px;
-
 }
+
+#trackList {
+    margin-top: 25px;
+    width: 50%;
+}
+
+.playingNow {
+    background-color: rgb(189, 187, 187);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
