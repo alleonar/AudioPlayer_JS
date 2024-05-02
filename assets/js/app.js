@@ -25,6 +25,18 @@ window.onload = async () => {
     //création de l'index de lecture;
     let trackIndex = 0;
 
+    //fonction pour charger la first track
+    async function loadFirstTrack(trackNumber) {
+        //chargement de la playlist
+        let playlist = await loadPlaylist();
+        myAudioPlayer.src = `./music/${playlist[trackNumber].src}`;
+        document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
+        document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
+        document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
+
+        myAudioPlayer.currentTime = 0;
+    }
+
     //fonction de loadingtrack
     async function loadTrack(trackNumber) {
         //chargement de la playlist
@@ -46,7 +58,8 @@ window.onload = async () => {
     };
 
     //chargement de la première piste
-    loadTrack(trackIndex);
+    loadFirstTrack(trackIndex);
+
 
     /* CONTROL PANEL */
     //récupération des boutons du control panel
@@ -181,9 +194,6 @@ window.onload = async () => {
         let targetTime = Math.floor((myAudioPlayer.duration / 100) * parseInt(trackProgress.value));
         myAudioPlayer.currentTime = targetTime;
     })
-
-
-
 
 }
 
