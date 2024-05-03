@@ -4,25 +4,47 @@
     padding: 0px;
 }
 
-body{
+body {
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    min-height: 100vh;
 }
 
-section div{
-    background-color: rgb(255, 255, 255, 0.6);
+section div {
+    color: rgb(203, 201, 201);
+    background-color: rgb(0, 0, 76, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    /* border: aqua 1px solid; */
 }
 
-#mainBadger img{
+#mainBadger img {
+    position: relative;
     height: 100vh;
+    z-index: 20;
 }
 
-#mainInterface{
+#mainInterface {
+    position: relative;
+    background-color: rgb(1, 1, 39);
     flex-grow: 1;
+    height: 100vh;
+    /* border: 3px solid pink; */
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
+    justify-content: space-evenly;
     align-items: center;
+    padding-bottom: 50px;
+    /* background-image: url('../../img/wave.svg'); */
+    /* background-repeat: no-repeat; */
+    /* background-position: bottom; */
+    /* background-size: cover; */
+}
+
+#mainInterface div {
+    position: relative;
+    z-index: 20;
 }
 
 /* class switch pour afficher cacher switcher des élements (boutons play/pause) */
@@ -30,27 +52,87 @@ section div{
     display: none;
 }
 
+
 #controlPanel {
-    width: 80%;
+    padding: 10px;
+    width: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    text-align: center;
 }
 
+#controlPanel button {
+
+    color: rgb(155, 154, 154);
+    background: none;
+    border: none;
+    font-size: 35px;
+}
+
+#muteBtn,
+#volumeInterface label {
+
+    color: rgb(171, 170, 170);
+    background: none;
+    border: none;
+    font-size: 30px;
+}
+
+#controlPanel button:hover,
+#muteBtn:hover {
+    color: rgb(212, 208, 208);
+}
+
+#trackInfo {
+    padding: 0px;
+    text-align: center;
+    /* border: 1px solid pink; */
+}
 
 #trackImg {
     width: 250px;
     height: 250px;
 }
 
-#trackList {
-    margin-top: 25px;
+#trackData {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-bottom: 5px;
+    /* border: 1px solid aqua; */
+}
+
+#trackData h3 {
+    padding-top: 20px;
+}
+
+#artistLine {
+    padding: 5px;
+}
+
+#trackTime {
+    padding: 5px;
+}
+
+#volumeInterface {
     width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#trackList {
+    width: 80%;
+}
+
+#trackList h3 {
+    text-align: center;
+    padding-bottom: 10px;
 }
 
 .playingNow {
-    background-color: rgb(189, 187, 187);
+    border-radius: 8px;
+    box-shadow: 4px 3px 10px rgba(0, 225, 255, 0.474);
 }
 
 table {
@@ -58,3 +140,73 @@ table {
     border-collapse: collapse;
 }
 
+table tr td {
+    padding: 5px;
+    padding-left: 10px;
+}
+
+#waves {
+    background: none;
+    width: 100%;
+    position: absolute;
+    /* bottom: -21px; */
+    bottom: 0px;
+    z-index: 1;
+}
+
+.waves-box {
+    position: relative;
+
+    /* max-height: 400px; */
+}
+
+#wave01 {
+    position: absolute;
+    animation: wave01 5s -.125s infinite, swell 7s ease -1.25s infinite;
+    opacity: 1;
+    z-index: 2;
+}
+
+@keyframes wave01 {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -600px;
+    }
+}
+
+@keyframes swell {
+
+    0%,
+    100% {
+        transform: translate3d(250px, 0px, 0px);
+    }
+
+    50% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+#wave02 {
+    position: relative;
+    animation: wave02 9s -.125s infinite, swell 7s ease -1.25s infinite;
+    opacity: 0.7;
+
+}
+
+@keyframes wave02 {
+    0% {
+        right: 0;
+    }
+
+    50% {
+        right: -600px;
+    }
+
+    100% {
+        right: 0;
+    }
+
+}

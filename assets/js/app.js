@@ -30,8 +30,8 @@ window.onload = async () => {
 
 
     //fonction de charge des informations
-    
-    
+
+
 
     //fonction pour charger la first track
     async function loadFirstTrack(trackNumber) {
@@ -46,36 +46,36 @@ window.onload = async () => {
         document.getElementById('tableList').innerHTML = "";
 
         playlist.forEach(track => {
-            if(playlist.indexOf(track) === trackIndex){
-                document.getElementById('tableList').innerHTML += 
-                `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
+            if (playlist.indexOf(track) === trackIndex) {
+                document.getElementById('tableList').innerHTML +=
+                    `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
                     <td>${track.music}</td>
                     <td>${track.artist}</td>
                     <td>${track.title}</td>
                 </tr>`
             } else {
-                document.getElementById('tableList').innerHTML += 
-                `<tr data-index="${playlist.indexOf(track)}">
+                document.getElementById('tableList').innerHTML +=
+                    `<tr data-index="${playlist.indexOf(track)}">
                     <td>${track.music}</td>
                     <td>${track.artist}</td>
                     <td>${track.title}</td>
                 </tr>`
             }
-            
+
         });
-        
+
         //chargement de la liste de lecture
         let trackList = document.querySelectorAll('tr');
 
 
-        trackList.forEach(track =>{
-            track.addEventListener("dblclick", (event)=>{
+        trackList.forEach(track => {
+            track.addEventListener("dblclick", (event) => {
                 let targetTrack = event.target.closest('tr');
                 trackIndex = parseInt(targetTrack.dataset.index);
                 loadTrack(trackIndex);
                 // targetTrack.classList.add('playingNow');
                 // console.log(targetTrack);
-                
+
             })
         })
     }
@@ -85,16 +85,16 @@ window.onload = async () => {
 
     //fonction de loadingtrack
     async function loadTrack(trackNumber) {
-        
+
         await loadFirstTrack(trackNumber);
-        
+
         myAudioPlayer.play();
-        
-        if (pauseBtn.classList.contains("hide")){
+
+        if (pauseBtn.classList.contains("hide")) {
             playBtn.classList.add("hide");
             pauseBtn.classList.remove("hide");
         };
-        
+
     };
 
 
@@ -119,13 +119,13 @@ window.onload = async () => {
         playBtn.classList.remove('hide');
     });
 
-    previousBtn.addEventListener('click', async ()=>{
-        -- trackIndex;
+    previousBtn.addEventListener('click', async () => {
+        --trackIndex;
         let playlist = await loadPlaylist();
-        if (trackIndex < 0){
+        if (trackIndex < 0) {
             trackIndex = playlist.length - 1;
             loadTrack(trackIndex);
-        } else if (trackIndex > playlist.length - 1){
+        } else if (trackIndex > playlist.length - 1) {
             trackIndex = 0;
             loadTrack(trackIndex);
         } else {
@@ -133,13 +133,13 @@ window.onload = async () => {
         }
     })
 
-    nextBtn.addEventListener('click', async ()=>{
-        ++ trackIndex;
+    nextBtn.addEventListener('click', async () => {
+        ++trackIndex;
         let playlist = await loadPlaylist();
-        if (trackIndex < 0){
+        if (trackIndex < 0) {
             trackIndex = playlist.length - 1;
             loadTrack(trackIndex);
-        } else if (trackIndex > playlist.length - 1){
+        } else if (trackIndex > playlist.length - 1) {
             trackIndex = 0;
             loadTrack(trackIndex);
         } else {
@@ -147,8 +147,23 @@ window.onload = async () => {
         }
     })
 
-    
-    
+    //changement de piste après la fin
+    myAudioPlayer.addEventListener('ended', async () => {
+        ++trackIndex;
+        let playlist = await loadPlaylist();
+        if (trackIndex < 0) {
+            trackIndex = playlist.length - 1;
+            loadTrack(trackIndex);
+        } else if (trackIndex > playlist.length - 1) {
+            trackIndex = 0;
+            loadTrack(trackIndex);
+        } else {
+            loadTrack(trackIndex);
+        }
+    })
+
+
+
 
     /* VOLUME INTERFACE */
     //recupération des boutons de l'interface volume
@@ -169,9 +184,11 @@ window.onload = async () => {
         if (trackMuted === false) {
             trackMuted = true;
             myAudioPlayer.volume = 0;
+            document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
         } else {
             trackMuted = false;
             volumeChange();
+            document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
         }
     })
 

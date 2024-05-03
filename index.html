@@ -14,7 +14,7 @@
 
     <!-- Lien vers le css -->
     <link rel="stylesheet" href="./assets/css/app.css">
-
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 </head>
 
 <body>
@@ -28,31 +28,30 @@
     <div id="trackInfo">
         <div id="trackData">
             <img id="trackImg" src="" alt=""/>
-            <hr>
             <h3 id="trackTitle"></h3>
-            <p>By: <span id=trackArtist></span></p>
+            <p id="artistLine">By: <span id=trackArtist></span></p>
             <p>(<span id="trackDuration"></span>)</p>
         </div>
         <div id="trackTime">
             <span id="trackCurrentTime"></span>
-            <input type="range" id="trackProgress" min="0" max ="100" step="0.1">
+            <input type="range" id="trackProgress" min="0" max ="100" step="0.1" value="0">
             <span id="trackTimeLeft"></span>
         </div>
     </div>
 
     <div id="volumeInterface">
         
-        <label for="volumeInput">Volume</label>
+        <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
         <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
-        <button id="muteBtn">Mute</button>
+        <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
     </div>
 
     <div id="controlPanel">
 
-        <button id="previousBtn">Previous</button>
-        <button id="playBtn">Play</button>
-        <button id="pauseBtn" class="hide">Pause</button>
-        <button id="nextBtn">Next</button>
+        <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
+        <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
+        <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
+        <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
 
     </div>
 
@@ -60,20 +59,20 @@
         
         <h3>Badger's Playlist</h3>
 
-        <table id="tableList">
-            <thead>
-                <tr scope="col">N°</tr>
-                <tr scope="col">Artist</tr>
-                <tr scope="col">Track</tr>
-            </thead>
-
-
-        </table>
+        <table id="tableList"></table>
 
     </div>
 
-</section>
     
+</section>
+
+<div id="waves">
+    <div class="waves-box">
+        <img id="wave01" alt="a moving wave" src="./img/wave01.svg">
+        <img id="wave02" alt="a moving wave" src="./img/wave02.svg">
+    </div>
+   
+</div>
 
 </body>
 </html>
