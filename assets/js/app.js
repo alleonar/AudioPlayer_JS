@@ -19,7 +19,7 @@ window.onload = async () => {
     //chargement de la playlist
     let playlist = await loadPlaylist();
 
-    //création du lecteur
+    //création du lecteur de media audio
     let myAudioPlayer = new Audio();
 
     //création de l'index de lecture;
@@ -28,24 +28,75 @@ window.onload = async () => {
     */
     let trackIndex = 0;
 
+    //fonction de changement de background en fonction de l'heure
+    function checkHour() {
+
+        //selection de la section contenant le player audio
+        const seaBackGround = document.getElementById('mainInterface');
+
+        //création d'un objet date actualisé
+        const now = new Date();
+
+        //vérification de l'heure actuelle
+        if (now.getHours() > 6 && now.getHours() < 22) {
+
+            //passage au background 'day' si l'heure se situe entre 7h et 21h
+            if (seaBackGround.classList.contains('night')) {
+                seaBackGround.classList.replace('night', 'day');
+            } else if (!seaBackGround.classList.contains('day')) {
+                seaBackGround.classList.add('day');
+            }
+
+            //passage à l'image blaireau dj de jour
+            document.getElementById('mainBadger').innerHTML =
+                '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger">'
+
+        } else {
+
+            //passage au background 'night' si l'heure se situe entre 21h et 7h
+            if (!seaBackGround.classList.contains('night')) {
+                if (seaBackGround.classList.contains('day')) {
+                    seaBackGround.classList.replace('day', 'night');
+                } else {
+                    seaBackGround.classList.add('night');
+                }
+            }
+
+            //passage à l'image blaireau dj de nuit
+            document.getElementById('mainBadger').innerHTML =
+                '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger">'
+        }
+    }
+
+    //chargement des premiers background et image de blaireau au chargement de la page
     checkHour();
 
+    //vérification de l'heure toutes les minutes pour une mise à jour automatique
+    setInterval(checkHour, 60000)
 
 
-
-    //fonction pour charger la first track
+    //fonction pour charger le premier morceau (trackNumber correspond à l'index de lecture)
     async function loadFirstTrack(trackNumber) {
-        //chargement de la playlist
 
+        //définition de la source de l'audio en fonction de l'index de lecture (trackindex)
         myAudioPlayer.src = `./music/${playlist[trackNumber].src}`;
+
+        //remise à zéro de la barre de progression(trackProgress)
         myAudioPlayer.currentTime = 0;
 
+        //affichage des données du morceau chargé
         document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
         document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
         document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
+
+        //remise à zéro de l'affichage du tableau contenant la playlist (tableList)
         document.getElementById('tableList').innerHTML = "";
 
+        //géneration d'un nouvel affichage de la playlist
         playlist.forEach(track => {
+
+            //vérifie si la piste est celle en cours de lecture et lui ajoute la classe playingNow
+            //qui lui ajoute des borders
             if (playlist.indexOf(track) === trackIndex) {
                 document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
@@ -53,6 +104,8 @@ window.onload = async () => {
                     <td>${track.artist}</td>
                     <td>${track.title}</td>
                 </tr>`
+
+                //affiche le reste de la playlist
             } else {
                 document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}">
@@ -64,24 +117,32 @@ window.onload = async () => {
 
         });
 
-        //chargement de la liste de lecture
+        //selection de l'ensemble des lignes de la liste de lecture
         let trackList = document.querySelectorAll('tr');
 
-
+        //ajout d'un ecouteur (double click) sur chaque lignes pour sélectionner et lire le morceau correspondant
         trackList.forEach(track => {
             track.addEventListener("dblclick", (event) => {
+
+                //selection de la ligne cible
                 let targetTrack = event.target.closest('tr');
+                //récuperation de son index et coversion en Integer pour eviter les conflits
                 trackIndex = parseInt(targetTrack.dataset.index);
+                //lecture de la piste en fonction de son index
                 loadTrack(trackIndex);
 
+                //selection des images de vagues pour animation
                 const wave01 = document.getElementById('wave01');
                 const wave02 = document.getElementById('wave02');
 
+                //vérification de l'état de l'animation
+                //si n'est pas en cours lance l'animation
                 if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
                     wave01.classList.add('animateWave01');
                     wave02.classList.add('animateWave02');
                 }
 
+                //si l'animation est en pause la remet en lecture
                 if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
                     wave01.classList.remove('closingWave01');
                     wave02.classList.remove('closingWave02');
@@ -91,16 +152,17 @@ window.onload = async () => {
         })
     }
 
-    //chargement de la première piste
-    await loadFirstTrack(trackIndex);
-
-    //fonction de loadingtrack
+    //fonction de loadingtrack (trackNumber correspond à l'index de lecture)
     async function loadTrack(trackNumber) {
 
+        //réutilisation de la fonction d'initialisation de lecture de piste
         await loadFirstTrack(trackNumber);
 
+        //mise en lecture automatique
         myAudioPlayer.play();
 
+        // vérification de l'état du bouton pause pour s'assurer qu'il est sur pause
+        // puisque la lecture est lancée
         if (pauseBtn.classList.contains("hide")) {
             playBtn.classList.add("hide");
             pauseBtn.classList.remove("hide");
@@ -108,6 +170,8 @@ window.onload = async () => {
 
     };
 
+    //chargement de la première piste au chargement de la page
+    await loadFirstTrack(trackIndex);
 
 
     /* CONTROL PANEL */
@@ -118,81 +182,119 @@ window.onload = async () => {
     const nextBtn = document.getElementById('nextBtn');
 
 
+    //édition de la fonction play
     playBtn.addEventListener('click', () => {
+
+        //lance la lecture de la piste
         myAudioPlayer.play();
+
+        //switch de la visibilité des boutons play / pause
         playBtn.classList.add('hide');
         pauseBtn.classList.remove('hide');
 
+        //selection des images de vagues pour animation
         const wave01 = document.getElementById('wave01');
         const wave02 = document.getElementById('wave02');
 
+        //vérification de l'état de l'animation
+        // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
             wave01.classList.add('animateWave01');
             wave02.classList.add('animateWave02');
         }
 
+        // remet l'animation en lecture si en pause
         if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
             wave01.classList.remove('closingWave01');
             wave02.classList.remove('closingWave02');
         }
     })
 
+    //édition de la fonction pause
     pauseBtn.addEventListener('click', () => {
+
+        //met la lecture de la piste en pause
         myAudioPlayer.pause();
-        document.getElementById('wave01').classList.add('closingWave01');
-        document.getElementById('wave02').classList.add('closingWave02');
+
+        //selection des images de vagues pour animation
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
+        //mise en pause des animations des vagues
+        wave01.classList.add('closingWave01');
+        wave02.classList.add('closingWave02');
+
+        //switch de la visibilité des boutons play / pause
         pauseBtn.classList.add('hide');
         playBtn.classList.remove('hide');
     });
 
+    //édition de la fonction précédent
     previousBtn.addEventListener('click', async () => {
+
+        //diminution du trackIndex
         --trackIndex;
+
+        // réinstanciation d'une playlist pour vérifier les informations
         let playlist = await loadPlaylist();
+
+        //verification de l'index pour repartir de la fin de la playlist s'il est inférieur à 0
         if (trackIndex < 0) {
             trackIndex = playlist.length - 1;
-            loadTrack(trackIndex);
-        } else if (trackIndex > playlist.length - 1) {
-            trackIndex = 0;
             loadTrack(trackIndex);
         } else {
             loadTrack(trackIndex);
         }
 
+        // recuperation des images de vagues
         const wave01 = document.getElementById('wave01');
         const wave02 = document.getElementById('wave02');
 
+        //vérification de l'état de l'animation
+        // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
             wave01.classList.add('animateWave01');
             wave02.classList.add('animateWave02');
         }
 
+        // remet l'animation en lecture si en pause
         if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
             wave01.classList.remove('closingWave01');
             wave02.classList.remove('closingWave02');
         }
     })
 
+    //édition de la fonction suivant
     nextBtn.addEventListener('click', async () => {
+
+        //augmentation du trackIndex
         ++trackIndex;
+
+        // réinstanciation d'une playlist pour vérifier les informations
         let playlist = await loadPlaylist();
-        if (trackIndex < 0) {
-            trackIndex = playlist.length - 1;
-            loadTrack(trackIndex);
-        } else if (trackIndex > playlist.length - 1) {
+
+
+        //verification de l'index pour repartir du début de la playlist s'il est supérieur 
+        // à la longueur de la playlist
+        if (trackIndex > playlist.length - 1) {
             trackIndex = 0;
             loadTrack(trackIndex);
         } else {
             loadTrack(trackIndex);
         }
 
+        // recuperation des images de vagues
         const wave01 = document.getElementById('wave01');
         const wave02 = document.getElementById('wave02');
 
+        //vérification de l'état de l'animation
+        // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
             wave01.classList.add('animateWave01');
             wave02.classList.add('animateWave02');
         }
 
+        // remet l'animation en lecture si en pause
         if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
             wave01.classList.remove('closingWave01');
             wave02.classList.remove('closingWave02');
@@ -201,30 +303,40 @@ window.onload = async () => {
 
     //changement de piste après la fin
     myAudioPlayer.addEventListener('ended', async () => {
+
+        //augmentation du trackIndex
         ++trackIndex;
+
+        // réinstanciation d'une playlist pour vérifier les informations
         let playlist = await loadPlaylist();
-        if (trackIndex < 0) {
-            trackIndex = playlist.length - 1;
-            loadTrack(trackIndex);
-        } else if (trackIndex > playlist.length - 1) {
+
+
+        //verification de l'index pour repartir du début de la playlist s'il est supérieur 
+        // à la longueur de la playlist
+        if (trackIndex > playlist.length - 1) {
             trackIndex = 0;
             loadTrack(trackIndex);
         } else {
             loadTrack(trackIndex);
         }
 
+        // recuperation des images de vagues
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
+        //vérification de l'état de l'animation
+        // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
             wave01.classList.add('animateWave01');
             wave02.classList.add('animateWave02');
         }
 
+        // remet l'animation en lecture si en pause
         if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
             wave01.classList.remove('closingWave01');
             wave02.classList.remove('closingWave02');
         }
     })
-
-
 
 
     /* VOLUME INTERFACE */
@@ -235,8 +347,8 @@ window.onload = async () => {
     //variable de switch mute/unmute
     let trackMuted = false;
 
+    
     function volumeChange() {
-
         let currentVolume = parseInt(volumeInput.value) / 100;
         myAudioPlayer.volume = currentVolume;
     }
@@ -315,38 +427,6 @@ window.onload = async () => {
     })
 
 
-    //fonction De changement de background en fonction de l'heure
-
-    function checkHour() {
-
-        const seaBackGround = document.getElementById('mainInterface');
-        const now = new Date();
-
-
-        if (now.getHours() > 7 && now.getHours() < 21) {
-
-            if (seaBackGround.classList.contains('night')) {
-                seaBackGround.classList.replace('night', 'day');
-            } else if (!seaBackGround.classList.contains('day')) {
-                seaBackGround.classList.add('day');
-            }
-            document.getElementById('mainBadger').innerHTML =
-            '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger">'
-
-        } else {
-            if (!seaBackGround.classList.contains('night')) {
-                if (seaBackGround.classList.contains('day')) {
-                    seaBackGround.classList.replace('day', 'night');
-                } else {
-                    seaBackGround.classList.add('night');
-                }
-            }
-            document.getElementById('mainBadger').innerHTML =
-            '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger">'
-        }
-    }
-
-    setInterval(checkHour, 60000)
 
 
 

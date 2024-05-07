@@ -14,66 +14,71 @@
 
     <!-- Lien vers le css -->
     <link rel="stylesheet" href="./assets/css/app.css">
+
+    <!-- lien vers les polices et icones  -->
     <link rel="stylesheet" href="./assets/css/fonts.css">
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 </head>
 
 <body>
+    <!-- container image principale / change en fonction de l'heure -->
+    <section id="mainBadger"></section>
 
-    <section id="mainBadger">
-        
-    </section>
-
+    <!-- container du player audio -->
     <section id="mainInterface">
 
-    <div id="trackInfo">
-        <div id="trackData">
-            <img id="trackImg" src="" alt=""/>
-            <h3 id="trackTitle"></h3>
-            <p id="artistLine">By: <span id=trackArtist></span></p>
-            <p>(<span id="trackDuration"></span>)</p>
+    <!-- container info piste chargée -->
+        <div id="trackInfo">
+
+            <!-- container avec pochette album (trackImg), titre du morceau (trackTitle), artiste (trackArtist) 
+                et durée totale du morceau(trackDuration) -->
+            <div id="trackData">
+                <img id="trackImg" src="" alt=""/>
+                <h3 id="trackTitle"></h3>
+                <p id="artistLine">By: <span id=trackArtist></span></p>
+                <p>(<span id="trackDuration"></span>)</p>
+            </div>
+
+            <!-- container avec le temps joué(trackCurrentTime), la barre de progression (trackProgress) et le 
+                temps restant (trackTimeLeft) -->
+            <div id="trackTime">
+                <span id="trackCurrentTime"></span>
+                <input type="range" id="trackProgress" min="0" max ="100" step="0.1" value="0">
+                <span id="trackTimeLeft"></span>
+            </div>
+
         </div>
-        <div id="trackTime">
-            <span id="trackCurrentTime"></span>
-            <input type="range" id="trackProgress" min="0" max ="100" step="0.1" value="0">
-            <span id="trackTimeLeft"></span>
+
+        <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
+        <div id="volumeInterface">    
+            <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
+            <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
+            <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
         </div>
+
+        <!-- container des opérations de lecture-->
+        <div id="controlPanel">
+            <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
+            <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
+            <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
+            <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+        </div>
+
+        <!-- container avec la playlist -->
+        <div id="trackList">    
+            <h3>Badger's Playlist</h3>
+            <table id="tableList"></table>
+        </div>
+
+    </section>
+
+    <!-- container pour les animations de vagues -->
+    <div id="waves">
+        <div class="waves-box">
+            <img id="wave01" alt="a moving wave" src="./img/wave01.svg">
+            <img id="wave02" alt="a moving wave" src="./img/wave02.svg">
+        </div> 
     </div>
-
-    <div id="volumeInterface">
-        
-        <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
-        <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
-        <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
-    </div>
-
-    <div id="controlPanel">
-
-        <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
-        <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
-        <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
-        <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
-
-    </div>
-
-    <div id="trackList">
-        
-        <h3>Badger's Playlist</h3>
-
-        <table id="tableList"></table>
-
-    </div>
-
-    
-</section>
-
-<div id="waves">
-    <div class="waves-box">
-        <img id="wave01" alt="a moving wave" src="./img/wave01.svg">
-        <img id="wave02" alt="a moving wave" src="./img/wave02.svg">
-    </div>
-   
-</div>
 
 </body>
 </html>
