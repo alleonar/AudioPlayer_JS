@@ -28,8 +28,8 @@ window.onload = async () => {
     */
     let trackIndex = 0;
 
+    checkHour();
 
-    //fonction de charge des informations
 
 
 
@@ -73,8 +73,19 @@ window.onload = async () => {
                 let targetTrack = event.target.closest('tr');
                 trackIndex = parseInt(targetTrack.dataset.index);
                 loadTrack(trackIndex);
-                // targetTrack.classList.add('playingNow');
-                // console.log(targetTrack);
+
+                const wave01 = document.getElementById('wave01');
+                const wave02 = document.getElementById('wave02');
+
+                if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
+                    wave01.classList.add('animateWave01');
+                    wave02.classList.add('animateWave02');
+                }
+
+                if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
+                    wave01.classList.remove('closingWave01');
+                    wave02.classList.remove('closingWave02');
+                }
 
             })
         })
@@ -111,10 +122,25 @@ window.onload = async () => {
         myAudioPlayer.play();
         playBtn.classList.add('hide');
         pauseBtn.classList.remove('hide');
+
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
+        if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
+            wave01.classList.add('animateWave01');
+            wave02.classList.add('animateWave02');
+        }
+
+        if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
+            wave01.classList.remove('closingWave01');
+            wave02.classList.remove('closingWave02');
+        }
     })
 
     pauseBtn.addEventListener('click', () => {
         myAudioPlayer.pause();
+        document.getElementById('wave01').classList.add('closingWave01');
+        document.getElementById('wave02').classList.add('closingWave02');
         pauseBtn.classList.add('hide');
         playBtn.classList.remove('hide');
     });
@@ -131,6 +157,19 @@ window.onload = async () => {
         } else {
             loadTrack(trackIndex);
         }
+
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
+        if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
+            wave01.classList.add('animateWave01');
+            wave02.classList.add('animateWave02');
+        }
+
+        if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
+            wave01.classList.remove('closingWave01');
+            wave02.classList.remove('closingWave02');
+        }
     })
 
     nextBtn.addEventListener('click', async () => {
@@ -144,6 +183,19 @@ window.onload = async () => {
             loadTrack(trackIndex);
         } else {
             loadTrack(trackIndex);
+        }
+
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
+        if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
+            wave01.classList.add('animateWave01');
+            wave02.classList.add('animateWave02');
+        }
+
+        if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
+            wave01.classList.remove('closingWave01');
+            wave02.classList.remove('closingWave02');
         }
     })
 
@@ -159,6 +211,16 @@ window.onload = async () => {
             loadTrack(trackIndex);
         } else {
             loadTrack(trackIndex);
+        }
+
+        if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
+            wave01.classList.add('animateWave01');
+            wave02.classList.add('animateWave02');
+        }
+
+        if (wave01.classList.contains('closingWave01') || wave02.classList.contains('closingWave02')) {
+            wave01.classList.remove('closingWave01');
+            wave02.classList.remove('closingWave02');
         }
     })
 
@@ -251,6 +313,42 @@ window.onload = async () => {
         let targetTime = Math.floor((myAudioPlayer.duration / 100) * parseInt(trackProgress.value));
         myAudioPlayer.currentTime = targetTime;
     })
+
+
+    //fonction De changement de background en fonction de l'heure
+
+    function checkHour() {
+
+        const seaBackGround = document.getElementById('mainInterface');
+        const now = new Date();
+
+
+        if (now.getHours() > 7 && now.getHours() < 21) {
+
+            if (seaBackGround.classList.contains('night')) {
+                seaBackGround.classList.replace('night', 'day');
+            } else if (!seaBackGround.classList.contains('day')) {
+                seaBackGround.classList.add('day');
+            }
+            document.getElementById('mainBadger').innerHTML =
+            '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger">'
+
+        } else {
+            if (!seaBackGround.classList.contains('night')) {
+                if (seaBackGround.classList.contains('day')) {
+                    seaBackGround.classList.replace('day', 'night');
+                } else {
+                    seaBackGround.classList.add('night');
+                }
+            }
+            document.getElementById('mainBadger').innerHTML =
+            '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger">'
+        }
+    }
+
+    setInterval(checkHour, 60000)
+
+
 
 }
 

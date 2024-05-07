@@ -9,14 +9,24 @@ body {
     flex-direction: row;
     overflow: hidden;
     min-height: 100vh;
+    font-family: 'POPPINS';
 }
 
-section div {
+#trackInfo, #volumeInterface, #controlPanel, #trackList {
     color: rgb(203, 201, 201);
-    background-color: rgb(0, 0, 76, 0.3);
+    background-color: rgb(0, 0, 76, 0.7);
     padding: 20px;
     border-radius: 12px;
     /* border: aqua 1px solid; */
+}
+
+.night{
+    background-color: rgb(1, 1, 39);
+
+}
+
+.day{
+    background-color: rgba(6, 139, 248, 0.3);
 }
 
 #mainBadger img {
@@ -27,7 +37,9 @@ section div {
 
 #mainInterface {
     position: relative;
-    background-color: rgb(1, 1, 39);
+    /* background-color: rgb(1, 1, 39);
+    background-color: rgba(13, 134, 233, 0.3); */
+
     flex-grow: 1;
     height: 100vh;
     /* border: 3px solid pink; */
@@ -92,8 +104,10 @@ section div {
 }
 
 #trackImg {
+    padding: 10px;
     width: 250px;
     height: 250px;
+    border-radius: 30% 70% 40% 30% / 30% 30% 70% 70% ;
 }
 
 #trackData {
@@ -162,18 +176,32 @@ table tr td {
 
 #wave01 {
     position: absolute;
-    animation: wave01 5s -.125s infinite, swell 7s ease -1.25s infinite;
+    bottom: -10px;
+
+    /* animation: wave01 5s -.125s infinite, swell 7s ease -1.25s infinite; */
     opacity: 1;
     z-index: 2;
 }
 
+.animateWave01{
+    animation: wave01 5s -.125s infinite, swell 7s ease -1.25s infinite;
+}
+
+.closingWave01{
+    animation-play-state: paused;
+}
+
 @keyframes wave01 {
     0% {
-        left: 0;
+        left: 0px;
+    }
+
+    50% {
+        left: -600px;
     }
 
     100% {
-        left: -600px;
+        left: 0px;
     }
 }
 
@@ -181,7 +209,7 @@ table tr td {
 
     0%,
     100% {
-        transform: translate3d(250px, 0px, 0px);
+        transform: translate3d(250px, 20px, 0px);
     }
 
     50% {
@@ -190,10 +218,20 @@ table tr td {
 }
 
 #wave02 {
+    /* width:3700px; */
     position: relative;
-    animation: wave02 9s -.125s infinite, swell 7s ease -1.25s infinite;
+    bottom: -10px;
+    /* animation: wave02 9s -.125s infinite, swell 7s ease -1.25s infinite; */
     opacity: 0.7;
 
+}
+
+.animateWave02{
+    animation: wave02 9s -.125s infinite, swell 7s ease -1.25s infinite;
+}
+
+.closingWave02{
+    animation-play-state: paused;
 }
 
 @keyframes wave02 {
@@ -203,6 +241,7 @@ table tr td {
 
     50% {
         right: -600px;
+        bottom: -20px;
     }
 
     100% {
