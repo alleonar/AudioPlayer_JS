@@ -33,10 +33,14 @@
             <!-- container avec pochette album (trackImg), titre du morceau (trackTitle), artiste (trackArtist) 
                 et durée totale du morceau(trackDuration) -->
             <div id="trackData">
-                <img id="trackImg" src="" alt=""/>
-                <h3 id="trackTitle"></h3>
-                <p id="artistLine">By: <span id=trackArtist></span></p>
-                <p>(<span id="trackDuration"></span>)</p>
+                <div>
+                    <img id="trackImg" src="" alt=""/>
+                </div>
+                <div>
+                    <h3 id="trackTitle"></h3>
+                    <p id="artistLine">By: <span id=trackArtist></span></p>
+                    <p>(<span id="trackDuration"></span>)</p>
+                </div>
             </div>
 
             <!-- container avec le temps joué(trackCurrentTime), la barre de progression (trackProgress) et le 
@@ -67,7 +71,7 @@
         <!-- container avec la playlist -->
         <div id="trackList">    
             <h3>Badger's Playlist</h3>
-            <table id="tableList"></table>
+                <table id="tableList"></table>
         </div>
 
     </section>

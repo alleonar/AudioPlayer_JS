@@ -38,7 +38,7 @@ window.onload = async () => {
         const now = new Date();
 
         //vérification de l'heure actuelle
-        if (now.getHours() > 6 && now.getHours() < 22) {
+        if (now.getHours() > 6 && now.getHours() < 20) {
 
             //passage au background 'day' si l'heure se situe entre 7h et 21h
             if (seaBackGround.classList.contains('night')) {
@@ -344,30 +344,54 @@ window.onload = async () => {
     const volumeInput = document.getElementById('volumeInput');
     const muteBtn = document.getElementById('muteBtn');
 
-    //variable de switch mute/unmute
+    // variable de switch mute/unmute
     let trackMuted = false;
 
-    
+    // édition de la fonction de changement de volume de l'élément audio
     function volumeChange() {
+        //recuperation de la valeur de la barre de volume(volumeInput) et conversion en float
         let currentVolume = parseInt(volumeInput.value) / 100;
+
+        //ajustement du volume de l'élément audio avec la nouvelle valeur
         myAudioPlayer.volume = currentVolume;
     }
 
+    // édition de la fonction mute
     muteBtn.addEventListener('click', () => {
 
+        // vérification de l'état de la variable trackMuted
         if (trackMuted === false) {
+
+            // passe trackMuted à true pour le suivit
             trackMuted = true;
+
+            // met le volume de l'élément audio à 0
             myAudioPlayer.volume = 0;
+
+            //switch l'affichage du bouton pour aider l'utilisateur à se repérer
             document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+
         } else {
+            // passe trackMuted à false pour le suivit
             trackMuted = false;
+
+            // retablit le volume en fonction de la valeur du volumeInput
             volumeChange();
+
+            //switch l'affichage du bouton pour aider l'utilisateur à se repérer
             document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
         }
     })
 
+    // edition de la fonction de changement de volume
     volumeInput.addEventListener('change', () => {
-        volumeChange();
+
+        // vérification de l'état de trackMuted avant d'effectuer le changement
+        if (trackMuted === false) {
+
+            // retablit le volume en fonction de la valeur du volumeInput
+            volumeChange();
+        }
     });
 
 
