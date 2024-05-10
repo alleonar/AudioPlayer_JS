@@ -407,13 +407,17 @@ window.onload = async () => {
     //déclaration des variables
     let playingTrackDuration = 0;
 
+    // suivit du currentTime de l'élément audio et mise à jour des infos temporelles
     myAudioPlayer.addEventListener('timeupdate', (event) => {
 
-        //total duration
+        //récupération et affichage du temps total de l'élément audio sous le format minutes secondes
         let minutes = Math.floor(myAudioPlayer.duration / 60);
         let seconds = Math.floor(myAudioPlayer.duration % 60);
 
+        //vérification du temps total l'élément audio chargé
         if (playingTrackDuration === 0 || myAudioPlayer.duration !== playingTrackDuration) {
+
+            //affichage du temps total du morceau(trackDuration)
             if (seconds < 10) {
                 trackDuration.innerHTML = `${minutes}: 0${seconds}`;
             } else {
@@ -421,38 +425,39 @@ window.onload = async () => {
             }
         }
 
-        //current time
+        // récupération du currentTime de l'élément audio chargé
         let currentTime = myAudioPlayer.currentTime;
 
+        // affichage du temps écoulé du morceau(trackCurrentTime)
         if ((myAudioPlayer.currentTime % 60) < 10) {
             trackCurrentTime.innerHTML = `${Math.floor(currentTime / 60)}: 0${Math.floor(currentTime % 60)}`;
         } else {
             trackCurrentTime.innerHTML = `${Math.floor(currentTime / 60)}: ${Math.floor(currentTime % 60)}`;
         }
 
-        //time remaining
+        // récupération du temps restant de l'élément audio chargé
         let timeRemaining = Math.floor(myAudioPlayer.duration - myAudioPlayer.currentTime)
 
+        // affichage du temps restant du morceau(timeRemaining)
         if ((timeRemaining % 60) < 10) {
             trackTimeLeft.innerHTML = `${Math.floor(timeRemaining / 60)}: 0${Math.floor(timeRemaining % 60)}`;
         } else {
             trackTimeLeft.innerHTML = `${Math.floor(timeRemaining / 60)}: ${Math.floor(timeRemaining % 60)}`;
         }
 
-        //progress bar
+        // mise à jour de la progress bar
         trackProgress.value = Math.floor((myAudioPlayer.currentTime / myAudioPlayer.duration) * 100)
 
     });
 
-    //changing time
+    // Edition de la fonction de changement de position temporelle de l'élément audio chargé
+    // ecouteur de modification de la progressbar par l'utilisateur
     trackProgress.addEventListener('input', () => {
+
+        // conversion et assignation de la nouvelle position de lecture
         let targetTime = Math.floor((myAudioPlayer.duration / 100) * parseInt(trackProgress.value));
         myAudioPlayer.currentTime = targetTime;
     })
-
-
-
-
 
 }
 
