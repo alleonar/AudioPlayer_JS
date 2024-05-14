@@ -42,22 +42,13 @@ body {
 
 #mainInterface {
     position: relative;
-    /* background-color: rgb(1, 1, 39);
-    background-color: rgba(13, 134, 233, 0.3); */
-
     flex-grow: 1;
     max-height: 100vh;
     height: 100%;
-    /* border: 3px solid pink; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* padding-bottom: 50px; */
-    /* background-image: url('../../img/wave.svg'); */
-    /* background-repeat: no-repeat; */
-    /* background-position: bottom; */
-    /* background-size: cover; */
     padding: 10px;
 }
 
@@ -158,8 +149,27 @@ body {
     width: 85%;
     min-height: 25%;
     height: auto;
-    overflow: scroll;
+    overflow-y: scroll;
+
 }
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+width: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    box-shadow: 0 0px 8px  rgba(0, 225, 255, 1); 
+    border-radius: 10px;
+}
+    
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:  rgba(0, 225, 255, 1);
+}
+
 
 #trackList h3 {
     text-align: center;
