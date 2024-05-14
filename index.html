@@ -27,7 +27,8 @@
     <!-- container du player audio -->
     <section id="mainInterface">
 
-    <!-- container info piste chargée -->
+        <!-- container info piste chargée -->
+        
         <div id="trackInfo">
 
             <!-- container avec pochette album (trackImg), titre du morceau (trackTitle), artiste (trackArtist) 
@@ -42,7 +43,7 @@
                     <p>(<span id="trackDuration"></span>)</p>
                 </div>
             </div>
-
+                
             <!-- container avec le temps joué(trackCurrentTime), la barre de progression (trackProgress) et le 
                 temps restant (trackTimeLeft) -->
             <div id="trackTime">
@@ -53,25 +54,25 @@
 
         </div>
 
-        <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
-        <div id="volumeInterface">    
-            <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
-            <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
-            <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
-        </div>
+            <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
+            <div id="volumeInterface">    
+                <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
+                <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
+                <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
 
-        <!-- container des opérations de lecture-->
-        <div id="controlPanel">
-            <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
-            <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
-            <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
-            <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
-        </div>
-
+            <!-- container des opérations de lecture-->
+            <div id="controlPanel">
+                <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
+                <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
+                <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
+                <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+            </div>
+        
         <!-- container avec la playlist -->
         <div id="trackList">    
             <h3>Badger's Playlist</h3>
-                <table id="tableList"></table>
+            <table id="tableList"></table>
         </div>
 
     </section>
