@@ -153,22 +153,6 @@ body {
 
 }
 
-/* SCROLLBAR */
-/* width */
-::-webkit-scrollbar {
-width: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    box-shadow: 0 0px 8px  rgba(0, 225, 255, 1); 
-    border-radius: 10px;
-}
-    
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background:  rgba(0, 225, 255, 1);
-}
 
 
 #trackList h3 {
@@ -192,6 +176,30 @@ table tr td {
     padding-left: 10px;
     min-width: 60px;
 }
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+width: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    box-shadow: 0 0px 8px  rgba(0, 225, 255, 1); 
+    border-radius: 10px;
+}
+    
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:  rgba(0, 225, 255, 1);
+}
+
+/* CURSOR */
+table {
+    cursor: default;
+}
+
+/* ANIMATION VAGUES */
 
 #waves {
     background: none;
@@ -275,7 +283,7 @@ table tr td {
 }
 
 /* 
-/* debut de travail sur les media queries
+/* MEDIA QUERIES
 /*
 /* DESKTOP */
 /* affichage de base en mode desktop supérieur à 1290px de large pour plus de 920px de haut
@@ -381,32 +389,53 @@ table tr td {
 
 /* PHONES */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 420px) and (orientation: portrait){
 
     body {
         font-size: 10px;
     }
 
     #mainInterface i {
-        font-size: 20px;
+        font-size: 25px;
+        bottom: -5px;
     }
 
-    #trackInfo {
-        min-width: 350px;
+    #mainInterface div{
+        min-width: auto;
+        width: 95%;
+    }
+
+    #trackInfo{
+        max-height: 33%;
+        justify-content: space-around;
+        font-size: 15px;
+
     }
 
     #trackData {
+        max-height: 80%;
         display: flex;
-        flex-flow: row;
-        justify-content: space-around;
+        flex-flow: column;
         align-items: center;
+
     }
 
-    #trackData div {
-        width: 50%;
+    
+    #trackData #trackImgContainer{
+        flex-grow: 2;
+        max-height: 70%;
     }
 
-    #trackTime {
+    #trackData #trackImgContainer #trackImg{
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    #trackInfo #trackTime{
+        padding: 10px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -417,9 +446,14 @@ table tr td {
         margin: 0px 25px;
     }
 
+    #trackData h3 {
+        margin: 0px;
+        padding: 0px;
+    }
+
     #controlPanel,
     #volumeInterface {
-        padding: 0;
+        padding: 5px;
         margin: 0;
     }
 
@@ -430,11 +464,86 @@ table tr td {
 
     #controlPanel i {
         position: relative;
-        bottom: 6px;
+        bottom: 5px;
     }
 
     #trackList {
         height: 40%;
     }
 
+    #trackList h3{
+        font-size: 15px;
+    }
+
+    #trackDurationContainer{
+        display:none;
+    }
 }
+
+/* PHONE LANDSCAPE */
+
+@media screen and (orientation: landscape) and (max-height: 420px){
+
+    #mainInterface {
+        min-height: 100%;
+        max-height: 100%;
+        padding: 1%;
+        display: flex;
+        flex-flow: column wrap;
+        
+    }
+
+    #mainInterface i {
+        font-size: 20px;
+    }
+    
+    #trackInfo,
+    #volumeInterface,
+    #controlPanel {
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+        max-width: 35%;
+    }
+    
+    #trackData{
+        font-size: 12px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    #trackData img{
+        height: 150px;
+        width: 150px;
+    }
+
+    #trackData h3 {
+        margin: 0;
+        padding: 0px;
+        /* border: solid 1px red; */
+    }
+    
+    #trackDurationContainer{
+        display:none;
+    }
+
+    #controlPanel i{
+        position: relative;
+        bottom: 5px;
+    }
+
+    #trackList {
+        height: 100%;
+        min-width: 50%;
+        max-width: 60%;
+        font-size: 12px;
+    }
+
+
+}
+
+
+
+
