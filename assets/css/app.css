@@ -5,6 +5,7 @@
 }
 
 body {
+    position: relative;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -12,6 +13,18 @@ body {
     font-family: 'POPPINS';
 }
 
+footer {
+    font-size: 12px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    z-index: 30;
+    color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 #trackInfo,
 #volumeInterface,
@@ -385,6 +398,25 @@ table {
         max-width: 60%;
         font-size: 14px;
     }
+}
+
+@media screen and (orientation: portrait) and (width: 600px) and (height: 960px){
+
+    #trackInfo{
+        max-height: 40%;
+    }
+
+    #trackInfo div{
+        margin: 0;
+        padding: 0;
+    }
+
+    #mainInterface #trackList{
+        max-height: 40%;
+        position: relative;
+    }
+
+
 }
 
 /* PHONES */
