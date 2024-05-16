@@ -4,9 +4,9 @@ Site URL: https://www.badgerrzplayer.com/
 Site lastmod: 2024-05-16
 Built with: {
     VS-Code
-    HTML 5
-    CSS 3
-    JavaScript ES6
+    HTML
+    CSS
+    JavaScript
     A lot of coffee...
 }
 
