@@ -49,7 +49,7 @@ footer {
 #mainBadger img {
     /* display: none; */
     position: relative;
-    height: 100vh;
+    max-height: 100vh;
     z-index: 20;
 }
 
@@ -125,8 +125,8 @@ footer {
 #trackImg {
     margin: auto;
     padding: 10px;
-    width: 250px;
-    max-width: 70%;
+    width: 200px;
+    /* max-width: 70%; */
     height: 200px;
     border-radius: 30% 70% 40% 30% / 30% 30% 70% 70%;
 }

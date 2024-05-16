@@ -49,7 +49,7 @@ window.onload = async () => {
 
             //passage à l'image blaireau dj de jour
             document.getElementById('mainBadger').innerHTML =
-                '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger">'
+                '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger in a studio by day" loading>'
 
         } else {
 
@@ -64,7 +64,7 @@ window.onload = async () => {
 
             //passage à l'image blaireau dj de nuit
             document.getElementById('mainBadger').innerHTML =
-                '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger">'
+                '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger on a stage by night" loading>'
         }
     }
 
@@ -83,8 +83,6 @@ window.onload = async () => {
 
         //remise à zéro de la barre de progression(trackProgress)
         myAudioPlayer.currentTime = 0;
-
-        console.log(document.getElementById('trackImg').src)
 
         //affichage des données du morceau chargé
         if (document.getElementById('trackImg').src === 'http://127.0.0.1:5500/') {
