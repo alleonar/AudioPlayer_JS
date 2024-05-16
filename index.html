@@ -6,17 +6,16 @@
     
     <!-- RESSOURCES -->
     <!-- lien js  -->
-    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/app.js" defer></script>
     
     <!-- Lien vers le css -->
     <link rel="stylesheet" href="./assets/css/app.css">
     
     <!-- lien vers les polices et icones  -->
-    <link rel="stylesheet" href="./assets/css/fonts.css">
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 
     <!-- favicon -->
-    <link rel="icon" href="./badger_head_icon.ico">
+    <link rel="icon" href="./favicon.ico">
     
 
     <!-- SEO -->
@@ -27,7 +26,7 @@
     content="Let DJ Badgerr play for you the best hits around with his awesome playlist. Just chill and enjoy !">
 
     <!-- Le fichier robots.txt indique aux moteurs de recherche les pages de votre site qu'ils peuvent explorer.  -->
-    <meta name=" robots" content=" index, follow">
+    <meta name=" robots" content=" index, nofollow">
 
     <!-- En utilisant une balise canonique dans le code, nous demandons aux moteurs de recherche de n’indexer que la page principale et d’éviter les doublons d’URLs. Nous utilisons cette balise lorsque nous avons plusieurs pages dupliquées de la même URL. -->
     <link rel="canonical" href="https://www.badgerrzplayer.com/" />
@@ -37,7 +36,7 @@
     <meta property="og:title" content="Badgerr'z Player" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.badgerrzplayer.com/badger.jpg" />
-    <meta property="og:image" content="http://127.0.0.1:5500/badger-dj-og.jpg" />
+    <meta property="og:image" content="https://127.0.0.1:5500/badger-dj-og.jpg" />
     <meta property="og:description" content="Let DJ Badgerr play for you the best hits around !!! Chill and enjoy !" />
 
     <!-- TWITTER CARDS -->
@@ -51,6 +50,11 @@
 </head>
 
 <body>
+
+    <header>
+        <h1>Da Badgerr'z Player</h1>
+    </header>
+
     <!-- container image principale / change en fonction de l'heure -->
     <section id="mainBadger"></section>
 
@@ -86,22 +90,32 @@
 
             <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
             <div id="volumeInterface">    
-                <label for="volumeInput"><i class="fa-solid fa-headphones"></i></label>
+                <label for="volumeInput"><i class="fa-solid fa-headphones" src="https://fontawesome.com/"></i></label>
                 <input type="range" id="volumeInput" min="0" max="100" value="50" step="1">
-                <button id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
+                <button id="muteBtn"  aria-label="Mute Button">
+                    <i class="fa-solid fa-volume-high" src="https://fontawesome.com/"></i>
+                </button>
             </div>
 
             <!-- container des opérations de lecture-->
             <div id="controlPanel">
-                <button id="previousBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
-                <button id="playBtn"><i class="fa-solid fa-circle-play"></i></button>
-                <button id="pauseBtn" class="hide"><i class="fa-solid fa-circle-pause"></i></button>
-                <button id="nextBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+                <button id="previousBtn" aria-label="Previous Button">
+                    <i class="fa-solid fa-circle-chevron-left" src="https://fontawesome.com/"></i>
+                </button>
+                <button id="playBtn" aria-label="Play Button">
+                    <i class="fa-solid fa-circle-play" src="https://fontawesome.com/"></i>
+                </button>
+                <button id="pauseBtn" class="hide" aria-label="Pause Button">
+                    <i class="fa-solid fa-circle-pause" src="https://fontawesome.com/"></i>
+                </button>
+                <button id="nextBtn" aria-label="Next Button">
+                    <i class="fa-solid fa-circle-chevron-right" src="https://fontawesome.com/"></i>
+                </button>
             </div>
         
         <!-- container avec la playlist -->
         <div id="trackList">    
-            <h3>Badgerr's Playlist</h3>
+            <h1>Badgerr's Playlist</h1>
             <table id="tableList"></table>
         </div>
 

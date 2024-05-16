@@ -1,3 +1,6 @@
+@import url(./fonts.css);
+
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -11,6 +14,12 @@ body {
     overflow: hidden;
     height: 100vh;
     font-family: 'POPPINS';
+}
+
+header {
+    position: absolute;
+    z-index: 30;
+    visibility: hidden;
 }
 
 footer {
@@ -168,7 +177,9 @@ footer {
 
 
 
-#trackList h3 {
+#trackList h1 {
+    font-size: 20px; 
+    font-weight: bold;
     text-align: center;
     padding-bottom: 10px;
 }
@@ -503,7 +514,7 @@ table {
         height: 40%;
     }
 
-    #trackList h3{
+    #trackList h1{
         font-size: 15px;
     }
 
@@ -554,7 +565,7 @@ table {
     #trackData h3 {
         margin: 0;
         padding: 0px;
-        /* border: solid 1px red; */
+        
     }
     
     #trackDurationContainer{
