@@ -1,5 +1,5 @@
-user-agent: *
-disallow: /downloads/
-disallow: /uploads/
+User-agent: *
+Disallow: /
+Allow: /index.html
 
 Sitemap: https://www.badgerrzplayer.com/sitemap.xml
