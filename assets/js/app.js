@@ -105,7 +105,7 @@ window.onload = async () => {
             if (playlist.indexOf(track) === trackIndex) {
                 document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
-                    <td>${track.music}</td>
+                    <td class="trackListNumber">${track.music}</td>
                     <td>${track.artist}</td>
                     <td>${track.title}</td>
                 </tr>`
@@ -114,7 +114,7 @@ window.onload = async () => {
             } else {
                 document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}">
-                    <td>${track.music}</td>
+                    <td class="trackListNumber">${track.music}</td>
                     <td>${track.artist}</td>
                     <td>${track.title}</td>
                 </tr>`

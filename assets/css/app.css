@@ -121,7 +121,8 @@ footer {
     text-shadow: 0 0px 8px rgba(0, 225, 255, 1);
 }
 
-#trackProgress:hover, #volumeInput:hover {
+#trackProgress:hover,
+#volumeInput:hover {
     box-shadow: 0 0px 8px rgba(0, 225, 255, 1);
 }
 
@@ -200,7 +201,7 @@ table {
 }
 
 table tr td {
-    font-size: 12px;
+    font-size: 15px;
     padding: 5px;
     padding-left: 10px;
     min-width: 60px;
@@ -359,6 +360,10 @@ table {
         width: 200px;
     }
 
+    table td {
+        font-size: 12px;
+    }
+
 
 }
 
@@ -437,7 +442,7 @@ table {
 
 /* PHONES */
 
-@media screen and (max-width: 420px) and (orientation: portrait) {
+@media screen and (max-width: 560px) and (orientation: portrait) {
 
     body {
         font-size: 10px;
@@ -517,13 +522,15 @@ table {
 
     #trackList {
         height: 40%;
+        font-size: 12px;
     }
 
     #trackList h1 {
         font-size: 15px;
     }
 
-    #trackDurationContainer {
+    #trackDurationContainer,
+    .trackListNumber {
         display: none;
     }
 }
