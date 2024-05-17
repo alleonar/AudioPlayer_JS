@@ -84,13 +84,16 @@ window.onload = async () => {
         //remise à zéro de la barre de progression(trackProgress)
         myAudioPlayer.currentTime = 0;
 
+        // détermine le rootspace
+        let serverPortInUse = 'http://127.0.0.1:5501/';
+
         //affichage des données du morceau chargé
-        if (document.getElementById('trackImg').src === 'http://127.0.0.1:5500/') {
+        if (document.getElementById('trackImg').src === serverPortInUse) {
             document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
             document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
             document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
         }
-
+        
         //remise à zéro de l'affichage du tableau contenant la playlist (tableList)
         document.getElementById('tableList').innerHTML = "";
 
@@ -170,7 +173,6 @@ window.onload = async () => {
         })
 
         setTimeout(() => {
-            console.log('check');
             document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
             document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
             document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
@@ -179,8 +181,7 @@ window.onload = async () => {
                 { transform: 'rotateY(0deg)' }
             ], {
                 duration: 500
-            }
-            )
+            })
         },
             500
         )

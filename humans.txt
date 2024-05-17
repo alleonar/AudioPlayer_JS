@@ -12,4 +12,10 @@ Built with: {
 
 /* TEAM */
 Editor: alleonar (Da Badgerr)
+github: alleonar
 Location: France
+
+/* PURPOSE */
+This project was made for my exam. Hard time on short formation but damn that's almost done.
+Please enjoy the music and feel free to support the authors.
+Big thank to my coworker and teacher for all those precious advises.
