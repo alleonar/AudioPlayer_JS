@@ -100,7 +100,7 @@ footer {
 
 #controlPanel button {
 
-    color: rgb(155, 154, 154);
+    color: rgb(210, 210, 210);
     background: none;
     border: none;
     font-size: 35px;
@@ -109,7 +109,7 @@ footer {
 #muteBtn,
 #volumeInterface label {
 
-    color: rgb(171, 170, 170);
+    color: rgb(210, 210, 210);
     background: none;
     border: none;
     font-size: 30px;
@@ -117,7 +117,12 @@ footer {
 
 #controlPanel button:hover,
 #muteBtn:hover {
-    color: rgb(212, 208, 208);
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0px 8px rgba(0, 225, 255, 1);
+}
+
+#trackProgress:hover, #volumeInput:hover {
+    box-shadow: 0 0px 8px rgba(0, 225, 255, 1);
 }
 
 #trackInfo {
@@ -178,7 +183,7 @@ footer {
 
 
 #trackList h1 {
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     padding-bottom: 10px;
@@ -204,18 +209,18 @@ table tr td {
 /* SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {
-width: 10px;
+    width: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    box-shadow: 0 0px 8px  rgba(0, 225, 255, 1); 
+    box-shadow: 0 0px 8px rgba(0, 225, 255, 1);
     border-radius: 10px;
 }
-    
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background:  rgba(0, 225, 255, 1);
+    background: rgba(0, 225, 255, 1);
 }
 
 /* CURSOR */
@@ -411,18 +416,18 @@ table {
     }
 }
 
-@media screen and (orientation: portrait) and (width: 600px) and (height: 960px){
+@media screen and (orientation: portrait) and (width: 600px) and (height: 960px) {
 
-    #trackInfo{
+    #trackInfo {
         max-height: 40%;
     }
 
-    #trackInfo div{
+    #trackInfo div {
         margin: 0;
         padding: 0;
     }
 
-    #mainInterface #trackList{
+    #mainInterface #trackList {
         max-height: 40%;
         position: relative;
     }
@@ -432,7 +437,7 @@ table {
 
 /* PHONES */
 
-@media screen and (max-width: 420px) and (orientation: portrait){
+@media screen and (max-width: 420px) and (orientation: portrait) {
 
     body {
         font-size: 10px;
@@ -443,12 +448,12 @@ table {
         bottom: -5px;
     }
 
-    #mainInterface div{
+    #mainInterface div {
         min-width: auto;
         width: 95%;
     }
 
-    #trackInfo{
+    #trackInfo {
         max-height: 33%;
         justify-content: space-around;
         font-size: 15px;
@@ -463,13 +468,13 @@ table {
 
     }
 
-    
-    #trackData #trackImgContainer{
+
+    #trackData #trackImgContainer {
         flex-grow: 2;
         max-height: 70%;
     }
 
-    #trackData #trackImgContainer #trackImg{
+    #trackData #trackImgContainer #trackImg {
         max-width: 100%;
         max-height: 100%;
         width: auto;
@@ -477,7 +482,7 @@ table {
         aspect-ratio: 1 / 1;
     }
 
-    #trackInfo #trackTime{
+    #trackInfo #trackTime {
         padding: 10px;
         display: flex;
         flex-direction: row;
@@ -514,18 +519,18 @@ table {
         height: 40%;
     }
 
-    #trackList h1{
+    #trackList h1 {
         font-size: 15px;
     }
 
-    #trackDurationContainer{
-        display:none;
+    #trackDurationContainer {
+        display: none;
     }
 }
 
 /* PHONE LANDSCAPE */
 
-@media screen and (orientation: landscape) and (max-height: 420px){
+@media screen and (orientation: landscape) and (max-height: 420px) {
 
     #mainInterface {
         min-height: 100%;
@@ -533,13 +538,13 @@ table {
         padding: 1%;
         display: flex;
         flex-flow: column wrap;
-        
+
     }
 
     #mainInterface i {
         font-size: 20px;
     }
-    
+
     #trackInfo,
     #volumeInterface,
     #controlPanel {
@@ -548,16 +553,16 @@ table {
         min-width: 0;
         max-width: 35%;
     }
-    
-    #trackData{
+
+    #trackData {
         font-size: 12px;
         width: 100%;
         margin: 0;
         padding: 0;
-        
+
     }
 
-    #trackData img{
+    #trackData img {
         height: 150px;
         width: 150px;
     }
@@ -565,14 +570,14 @@ table {
     #trackData h3 {
         margin: 0;
         padding: 0px;
-        
-    }
-    
-    #trackDurationContainer{
-        display:none;
+
     }
 
-    #controlPanel i{
+    #trackDurationContainer {
+        display: none;
+    }
+
+    #controlPanel i {
         position: relative;
         bottom: 5px;
     }
@@ -586,7 +591,3 @@ table {
 
 
 }
-
-
-
-
