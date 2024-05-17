@@ -62,7 +62,7 @@
     </header>
 
     <!-- container image principale / change en fonction de l'heure -->
-    <section id="mainBadger"></section>
+    <section id="mainBadger" aria-hidden="true"></section>
 
     <!-- container du player audio -->
     <section id="mainInterface">
@@ -74,7 +74,7 @@
             <!-- container avec pochette album (trackImg), titre du morceau (trackTitle), artiste (trackArtist) 
                 et durée totale du morceau(trackDuration) -->
             <div id="trackData">
-                <div id="trackImgContainer">
+                <div id="trackImgContainer" aria-hidden="true">
                     <img id="trackImg" src="" alt="the current playing track album cover" loading/>
                 </div>
                 <div>
@@ -96,7 +96,7 @@
 
             <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
             <div id="volumeInterface">    
-                <label for="volumeInput" aria-label="volume icon">
+                <label for="volumeInput" aria-label="volume icon" aria-hidden="true">
                     <i class="fa-solid fa-headphones" src="https://fontawesome.com/"></i>
                 </label>
                 <input type="range" id="volumeInput" min="0" max="100" value="50" step="1" aria-label="volume range">
@@ -130,7 +130,7 @@
     </section>
 
     <!-- container pour les animations de vagues -->
-    <div id="waves">
+    <div id="waves" aria-hidden="true">
         <div class="waves-box">
             <img id="wave01" alt="a moving wave" src="./img/wave01.svg">
             <img id="wave02" alt="a moving wave" src="./img/wave02.svg">
