@@ -84,7 +84,7 @@ window.onload = async () => {
         //remise à zéro de la barre de progression(trackProgress)
         myAudioPlayer.currentTime = 0;
 
-        // détermine le rootspace
+        // détermine le server et le root
         let serverPortInUse = 'http://127.0.0.1:5501/';
 
         //affichage des données du morceau chargé

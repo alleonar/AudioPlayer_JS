@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- RESSOURCES -->
     <!-- lien js  -->
     <script src="./assets/js/app.js" defer></script>
-    
+
     <!-- Lien vers le css -->
     <link rel="stylesheet" href="./assets/css/app.css">
-    
+
     <!-- lien vers les polices et icones  -->
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 
     <!-- favicon -->
     <link rel="icon" href="./favicon.ico">
-    
+
 
     <!-- SEO -->
     <title>Badgerr'z Player | Let DJ Badgerr play for you the best hits around</title>
     <meta property="og:site_name" content="Badgerr'z Player">
-    <meta name="description" 
-    content="Let DJ Badgerr play for you the best hits around with his awesome playlist. Just chill and enjoy !">
+    <meta name="description"
+        content="Let DJ Badgerr play for you the best hits around with his awesome playlist. Just chill and enjoy !">
 
     <!-- Le fichier robots.txt indique aux moteurs de recherche les pages de votre site qu'ils peuvent explorer.  -->
     <meta name=" robots" content=" index, nofollow">
@@ -58,24 +59,25 @@
 
     <!-- ajout d'une balise header cachée -->
     <header>
-        <h1>Da Badgerr'z Player</h1>
+        <h1 role="heading">Da Badgerr'z Player</h1>
     </header>
 
     <!-- container image principale / change en fonction de l'heure -->
     <section id="mainBadger" aria-hidden="true"></section>
 
     <!-- container du player audio -->
-    <section id="mainInterface">
+    <section id="mainInterface" role="main">
 
         <!-- container info piste chargée -->
-        
+
         <div id="trackInfo">
 
             <!-- container avec pochette album (trackImg), titre du morceau (trackTitle), artiste (trackArtist) 
                 et durée totale du morceau(trackDuration) -->
             <div id="trackData">
                 <div id="trackImgContainer" aria-hidden="true">
-                    <img id="trackImg" src="" alt="the current playing track album cover" loading/>
+                    <img id="trackImg" src="" alt="the current playing track album cover"
+                        aria-label="current playing track album cover" loading />
                 </div>
                 <div>
                     <h3 id="trackTitle"></h3>
@@ -83,46 +85,48 @@
                     <p id="trackDurationContainer">(<span id="trackDuration"></span>)</p>
                 </div>
             </div>
-                
+
             <!-- container avec le temps joué(trackCurrentTime), la barre de progression (trackProgress) et le 
                 temps restant (trackTimeLeft) -->
             <div id="trackTime">
                 <span id="trackCurrentTime"></span>
-                <input type="range" id="trackProgress" min="0" max ="100" step="0.1" value="0" aria-label="playing track current time">
+                <input type="range" id="trackProgress" min="0" max="100" step="0.1" value="0"
+                    aria-label="playing track current time">
                 <span id="trackTimeLeft"></span>
             </div>
 
         </div>
 
-            <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
-            <div id="volumeInterface">    
-                <label for="volumeInput" aria-label="volume icon" aria-hidden="true">
-                    <i class="fa-solid fa-headphones" src="https://fontawesome.com/"></i>
-                </label>
-                <input type="range" id="volumeInput" min="0" max="100" value="50" step="1" aria-label="volume range">
-                <button id="muteBtn"  aria-label="Mute Button">
-                    <i class="fa-solid fa-volume-high" src="https://fontawesome.com/"></i>
-                </button>
-            </div>
+        <!-- container de gestion des opérations de volume(volumeInput) et mute(muteBtn) -->
+        <div id="volumeInterface">
+            <label for="volumeInput" aria-label="volume icon" aria-hidden="true">
+                <i class="fa-solid fa-headphones" src="https://fontawesome.com/"></i>
+            </label>
+            <input type="range" id="volumeInput" min="0" max="100" value="50" step="1" role="volume level input"
+                aria-label="volume current level">
+            <button id="muteBtn" aria-label="Mute Button">
+                <i class="fa-solid fa-volume-high" src="https://fontawesome.com/"></i>
+            </button>
+        </div>
 
-            <!-- container des opérations de lecture-->
-            <div id="controlPanel">
-                <button id="previousBtn" aria-label="Previous Button">
-                    <i class="fa-solid fa-circle-chevron-left" src="https://fontawesome.com/"></i>
-                </button>
-                <button id="playBtn" aria-label="Play Button">
-                    <i class="fa-solid fa-circle-play" src="https://fontawesome.com/"></i>
-                </button>
-                <button id="pauseBtn" class="hide" aria-label="Pause Button">
-                    <i class="fa-solid fa-circle-pause" src="https://fontawesome.com/"></i>
-                </button>
-                <button id="nextBtn" aria-label="Next Button">
-                    <i class="fa-solid fa-circle-chevron-right" src="https://fontawesome.com/"></i>
-                </button>
-            </div>
-        
+        <!-- container des opérations de lecture-->
+        <div id="controlPanel">
+            <button id="previousBtn" aria-label="Previous Button">
+                <i class="fa-solid fa-circle-chevron-left" src="https://fontawesome.com/"></i>
+            </button>
+            <button id="playBtn" aria-label="Play Button">
+                <i class="fa-solid fa-circle-play" src="https://fontawesome.com/"></i>
+            </button>
+            <button id="pauseBtn" class="hide" aria-label="Pause Button">
+                <i class="fa-solid fa-circle-pause" src="https://fontawesome.com/"></i>
+            </button>
+            <button id="nextBtn" aria-label="Next Button">
+                <i class="fa-solid fa-circle-chevron-right" src="https://fontawesome.com/"></i>
+            </button>
+        </div>
+
         <!-- container avec la playlist -->
-        <div id="trackList">    
+        <div id="trackList">
             <h1>Badgerr's Playlist</h1>
             <table id="tableList"></table>
         </div>
@@ -134,7 +138,7 @@
         <div class="waves-box">
             <img id="wave01" alt="a moving wave" src="./img/wave01.svg">
             <img id="wave02" alt="a moving wave" src="./img/wave02.svg">
-        </div> 
+        </div>
     </div>
 
     <footer>
@@ -143,4 +147,5 @@
         </div>
     </footer>
 </body>
+
 </html>
