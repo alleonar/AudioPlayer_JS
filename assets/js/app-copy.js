@@ -31,9 +31,6 @@ window.onload = async () => {
     //fonction de changement de background en fonction de l'heure
     function checkHour() {
 
-        //selection de l'image principale
-        let badgerImage = document.getElementById('mainBadger');
-
         //selection de la section contenant le player audio
         const seaBackGround = document.getElementById('mainInterface');
 
@@ -51,7 +48,7 @@ window.onload = async () => {
             }
 
             //passage à l'image blaireau dj de jour
-            badgerImage.innerHTML =
+            document.getElementById('mainBadger').innerHTML =
                 '<img id="badgerLogo" src="./img/badger-dj-1.jpg" alt="a djying badger in a studio by day" loading>'
 
         } else {
@@ -66,7 +63,7 @@ window.onload = async () => {
             }
 
             //passage à l'image blaireau dj de nuit
-            badgerImage.innerHTML =
+            document.getElementById('mainBadger').innerHTML =
                 '<img id="badgerLogo" src="./img/badger-dj-3.jpg" alt="a djying badger on a stage by night" loading>'
         }
     }
@@ -78,21 +75,6 @@ window.onload = async () => {
     setInterval(checkHour, 60000)
 
 
-
-    /* LOAD TRACK FUNCTION *********************************************************************************************************************/
-
-    //déclaration des variable
-    //recupération des éléments affichés
-    let trackImg = document.getElementById('trackImg');
-    let trackTitle = document.getElementById('trackTitle');
-    let trackArtist = document.getElementById('trackArtist');
-    let tableList = document.getElementById('tableList');
-    const wave01 = document.getElementById('wave01');
-    const wave02 = document.getElementById('wave02');
-
-    // détermine le server et le root
-    let serverPortInUse = 'http://127.0.0.1:5501/';
-
     //fonction pour charger le premier morceau (trackNumber correspond à l'index de lecture)
     async function loadFirstTrack(trackNumber) {
 
@@ -102,15 +84,18 @@ window.onload = async () => {
         //remise à zéro de la barre de progression(trackProgress)
         myAudioPlayer.currentTime = 0;
 
-        //affichage des données du morceau chargé
-        if (trackImg.src === serverPortInUse) {
-            trackImg.src = `./img/${playlist[trackNumber].cover}`;
-            trackTitle.innerHTML = `${playlist[trackNumber].title}`;
-            trackArtist.innerHTML = `${playlist[trackNumber].artist}`;
-        }
+        // détermine le server et le root
+        let serverPortInUse = 'http://127.0.0.1:5501/';
 
+        //affichage des données du morceau chargé
+        if (document.getElementById('trackImg').src === serverPortInUse) {
+            document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
+            document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
+            document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
+        }
+        
         //remise à zéro de l'affichage du tableau contenant la playlist (tableList)
-        tableList.innerHTML = "";
+        document.getElementById('tableList').innerHTML = "";
 
         //géneration d'un nouvel affichage de la playlist
         playlist.forEach(track => {
@@ -118,7 +103,7 @@ window.onload = async () => {
             //vérifie si la piste est celle en cours de lecture et lui ajoute la classe playingNow
             //qui lui ajoute des borders
             if (playlist.indexOf(track) === trackIndex) {
-                tableList.innerHTML +=
+                document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}" class="playingNow">
                     <td class="trackListNumber">${track.music}</td>
                     <td>${track.artist}</td>
@@ -127,7 +112,7 @@ window.onload = async () => {
 
                 //affiche le reste de la playlist
             } else {
-                tableList.innerHTML +=
+                document.getElementById('tableList').innerHTML +=
                     `<tr data-index="${playlist.indexOf(track)}">
                     <td class="trackListNumber">${track.music}</td>
                     <td>${track.artist}</td>
@@ -151,6 +136,10 @@ window.onload = async () => {
                 //lecture de la piste en fonction de son index
                 loadTrack(trackIndex);
 
+                //selection des images de vagues pour animation
+                const wave01 = document.getElementById('wave01');
+                const wave02 = document.getElementById('wave02');
+
                 //vérification de l'état de l'animation
                 //si n'est pas en cours lance l'animation
                 if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
@@ -172,11 +161,11 @@ window.onload = async () => {
 
         await loadFirstTrack(trackNumber);
 
-        // FLIP CARD ANIMATION
+        // TEST ANIMATION FLIP
 
-        let trackInfo = document.getElementById('trackInfo');
+        // await loadFirstTrack(trackNumber);
 
-        trackInfo.animate([
+        document.getElementById('trackInfo').animate([
             { transform: 'rotateY(0deg)' },
             { transform: 'rotateY(90deg)' }
         ], {
@@ -184,10 +173,10 @@ window.onload = async () => {
         })
 
         setTimeout(() => {
-            trackImg.src = `./img/${playlist[trackNumber].cover}`;
-            trackTitle.innerHTML = `${playlist[trackNumber].title}`;
-            trackArtist.innerHTML = `${playlist[trackNumber].artist}`;
-            trackInfo.animate([
+            document.getElementById('trackImg').src = `./img/${playlist[trackNumber].cover}`;
+            document.getElementById('trackTitle').innerHTML = `${playlist[trackNumber].title}`;
+            document.getElementById('trackArtist').innerHTML = `${playlist[trackNumber].artist}`;
+            document.getElementById('trackInfo').animate([
                 { transform: 'rotateY(90deg)' },
                 { transform: 'rotateY(0deg)' }
             ], {
@@ -231,6 +220,10 @@ window.onload = async () => {
         playBtn.classList.add('hide');
         pauseBtn.classList.remove('hide');
 
+        //selection des images de vagues pour animation
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
         //vérification de l'état de l'animation
         // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
@@ -250,6 +243,10 @@ window.onload = async () => {
 
         //met la lecture de la piste en pause
         myAudioPlayer.pause();
+
+        //selection des images de vagues pour animation
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
 
         //mise en pause des animations des vagues
         wave01.classList.add('closingWave01');
@@ -276,6 +273,10 @@ window.onload = async () => {
         } else {
             loadTrack(trackIndex);
         }
+
+        // recuperation des images de vagues
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
 
         //vérification de l'état de l'animation
         // lance l'animation si à l'arrêt
@@ -310,6 +311,10 @@ window.onload = async () => {
             loadTrack(trackIndex);
         }
 
+        // recuperation des images de vagues
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
         //vérification de l'état de l'animation
         // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
@@ -343,6 +348,10 @@ window.onload = async () => {
             loadTrack(trackIndex);
         }
 
+        // recuperation des images de vagues
+        const wave01 = document.getElementById('wave01');
+        const wave02 = document.getElementById('wave02');
+
         //vérification de l'état de l'animation
         // lance l'animation si à l'arrêt
         if (!wave01.classList.contains('animateWave01') || !wave02.classList.contains('animateWave02')) {
@@ -356,6 +365,7 @@ window.onload = async () => {
             wave02.classList.remove('closingWave02');
         }
     })
+
 
     /* VOLUME INTERFACE */
     //recupération des boutons de l'interface volume
@@ -387,7 +397,7 @@ window.onload = async () => {
             myAudioPlayer.volume = 0;
 
             //switch l'affichage du bouton pour aider l'utilisateur à se repérer
-            muteBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+            document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
 
         } else {
             // passe trackMuted à false pour le suivit
@@ -397,7 +407,7 @@ window.onload = async () => {
             volumeChange();
 
             //switch l'affichage du bouton pour aider l'utilisateur à se repérer
-            muteBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+            document.getElementById('muteBtn').innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
         }
     })
 
