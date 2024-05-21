@@ -7,12 +7,12 @@ window.onload = async () => {
     //récupération de la playlist
     async function loadPlaylist() {
         try {
-            const response = await fetch("../data/playlist.json");
+            const response = await fetch('../data/playlist.json');
             const data = await response.json();
             const playlist = await data.playlist;
             return playlist;
         } catch (error) {
-            console.error("problem to retrieve playlist");
+            console.error('problem to retrieve playlist');
         }
     };
 
@@ -142,7 +142,7 @@ window.onload = async () => {
 
         //ajout d'un ecouteur (double click) sur chaque lignes pour sélectionner et lire le morceau correspondant
         trackList.forEach(track => {
-            track.addEventListener("dblclick", (event) => {
+            track.addEventListener('dblclick', (event) => {
 
                 //selection de la ligne cible
                 let targetTrack = event.target.closest('tr');
@@ -202,9 +202,9 @@ window.onload = async () => {
 
         // vérification de l'état du bouton pause pour s'assurer qu'il est sur pause
         // puisque la lecture est lancée
-        if (pauseBtn.classList.contains("hide")) {
-            playBtn.classList.add("hide");
-            pauseBtn.classList.remove("hide");
+        if (pauseBtn.classList.contains('hide')) {
+            playBtn.classList.add('hide');
+            pauseBtn.classList.remove('hide');
         };
 
     };
